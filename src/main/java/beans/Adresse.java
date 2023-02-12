@@ -4,7 +4,27 @@ public class Adresse {
 	
 	private String rue ;
 	private String ville ;
+	private int id ;
+	private static int ctr = 0 ;
 	
+	public Adresse(String rue, String ville) {
+		super();
+		this.id = ctr++;
+		this.rue = rue;
+		this.ville = ville;
+	}
+
+	
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
 	public String getRue() {
 		return rue;
 	}

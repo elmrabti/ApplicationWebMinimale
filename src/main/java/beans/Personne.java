@@ -6,9 +6,20 @@ import org.apache.catalina.ha.backend.CollectedInfo;
 
 public class Personne {
 	
+	private int id ;
 	private String nom ;
 	private String prenom ;
 	private Collection<Adresse> listeAdresses ;
+	private static int ctr = 0 ;
+	
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 	
 	public Collection<Adresse> getListeAdresses() {
@@ -19,6 +30,13 @@ public class Personne {
 		this.listeAdresses = listeAdresses;
 	}
 	
+	public Personne(String nom, String prenom) {
+		super();
+		this.id = ctr++ ;
+		this.nom = nom;
+		this.prenom = prenom;
+	}
+
 	public String getNom() {
 		return nom;
 	}

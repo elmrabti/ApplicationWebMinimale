@@ -43,10 +43,18 @@ public class App extends HttpServlet {
 		String addP = request.getParameter("addPersonne") ;
 		String addA = request.getParameter("addAdresse") ;
 		String nom = request.getParameter("Nom") ;
-		String prenom = request.getParameter("Prénom") ;
+		String prenom = request.getParameter("Prenom") ;
 		String ville = request.getParameter("Ville") ;
 		String rue = request.getParameter("Rue") ;
 		String op = request.getParameter("op") ;
+		System.out.println(addP);
+		System.out.println(addA);
+		System.out.println(nom);
+		System.out.println(prenom);
+		System.out.println(ville);
+		System.out.println(rue);
+		System.out.println(op);
+
 		
 		if (addP!=null && nom!=null && prenom!=null && !nom.equals("") && !prenom.equals("") ) {
 			f.ajoutPersonne(nom, prenom) ;
@@ -60,21 +68,32 @@ public class App extends HttpServlet {
 		
 		if (op!=null && op.equals("associer")) {
 			PrintWriter out = response.getWriter() ;
-			
-			out.println("<form action='' method='get' >" ) ;
-			out.println("Choisir une personne<\br>") ;
+			response.setContentType("text/html");
+
+			out.println("<form action='index.html' method='get'>" ) ;
+			out.println("Choisir une personne<br>") ;
 			for(Personne p : f.listePersonnes()) 
-				out.println("<input type='radio' name='personneId' value="+p.getId()+">"+p.getNom()+" "+p.getPrenom()+"<\br>");
-			out.println("Choisir une adresse<\br>") ;
+			  out.println("<input type='radio' name='personneId' value="+p.getId()+">"+p.getNom()+" "+p.getPrenom()+"<br>");
+			out.println("Choisir une adresse<br>") ;
 			for(Adresse a : f.listeAdresses()) 
-				out.println("<input type='radio' name='adresseId' value="+a.getId()+">"+a.getRue()+" "+a.getVille()+"<\br>");
-			
-			out.println("<input type='submit' value='Ok' name'Associer'><\form>") ;
-			out.println("<a href='index.html'>Retour></a>") ;
-				
-				
+			  out.println("<input type='radio' name='adresseId' value="+a.getId()+">"+a.getRue()+" "+a.getVille()+"<br>");
+
+			out.println("<input type='submit' value='Ok' name'Associer'></form>") ;
+			out.println("<a href='index.html'>Retour</a>") ;	
 			
 		}
+		
+		if (op!=null && op.equals("lister")) {
+			PrintWriter out = response.getWriter() ;
+			response.setContentType("text/html") ;
+			for(Personne p : f.listePersonnes()) {
+				out.println(p.getNom()+" "+p.getPrenom()+" est dans:") ;
+				for(Adresse a : p.getListeAdresses()) {
+					out.println("**"+a.getRue()+" "+a.getVille()+" ") ;
+				}
+			}
+			
+ 		}
 			
 		
 	}

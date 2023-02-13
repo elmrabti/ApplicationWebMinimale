@@ -1,11 +1,17 @@
 package beans;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class Facade {
 	
 	Collection<Personne> per ;
 	Collection<Adresse> adr ;
+	
+	public Facade() {
+		per = new ArrayList<Personne>() ;
+		adr = new ArrayList<Adresse>() ;
+	}
 	
 	public void ajoutPersonne(String nom, String prenom) {
 		per.add(new Personne(nom, prenom)) ;

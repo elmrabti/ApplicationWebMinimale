@@ -33,8 +33,8 @@ public class Personne {
 	public Personne(String nom, String prenom) {
 		super();
 		this.id = ctr++ ;
-		this.nom = nom;
-		this.prenom = prenom;
+		this.nom = nom ;
+		this.prenom = prenom ;
 	}
 
 	public String getNom() {

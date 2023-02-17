@@ -39,11 +39,15 @@ public class Facade {
 		for(Adresse a: adr)
 			if(a.getId() == adresseId)
 				adresse = a ;
-		
-		if(personne!=null && adresse == null) {
-			Collection<Adresse> liste = personne.getListeAdresses() ;
-			liste.add(adresse) ;
-			personne.setListeAdresses(liste);
+		System.out.println(personne);
+		System.out.println(adresse);
+
+		if(personne!=null && adresse != null) {
+			//Collection<Adresse> liste = personne.getListeAdresses() ;
+			//liste.add(adresse) ;
+			//personne.setListeAdresses(liste);
+			System.out.println("Ici 0000");
+			personne.addAdresse(adresse);
 		}
 			
 		

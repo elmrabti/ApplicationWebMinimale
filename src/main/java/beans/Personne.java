@@ -1,5 +1,6 @@
 package beans;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.apache.catalina.ha.backend.CollectedInfo;
@@ -48,6 +49,14 @@ public class Personne {
 	}
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
+	}
+	
+	public void addAdresse(Adresse a) {
+		if (listeAdresses == null) {
+		    listeAdresses = new ArrayList<>();
+		}
+		listeAdresses.add(a);
+		System.out.println("encore");
 	}
 	
 	

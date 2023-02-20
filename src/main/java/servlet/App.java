@@ -104,9 +104,9 @@ public class App extends HttpServlet {
 			PrintWriter out = response.getWriter() ;
 			response.setContentType("text/html") ;
 			for(Personne p : f.listePersonnes()) {
-				out.println(p.getNom()+" "+p.getPrenom()+" est dans:") ;
+				out.println("<br>"+p.getNom()+" "+p.getPrenom()+" est dans:") ;
 				for(Adresse a : p.getListeAdresses()) {
-					out.println("**"+a.getRue()+" "+a.getVille()+" ") ;
+					out.println("**"+a.getRue()+" "+a.getVille()+",		") ;
 				}
 			}
 			

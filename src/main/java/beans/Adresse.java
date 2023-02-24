@@ -1,15 +1,17 @@
 package beans;
 
+import util.Instance;
+
 public class Adresse {
 	
 	private String rue ;
 	private String ville ;
 	private int id ;
-	private static int ctr = 0 ;
+	private static Instance instance = new Instance() ;
 	
 	public Adresse(String rue, String ville) {
 		super();
-		this.id = ctr++;
+		this.id = instance.getNext();
 		this.rue = rue;
 		this.ville = ville;
 	}

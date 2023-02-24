@@ -2,6 +2,8 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.Adresse;
+import beans.Connect;
 import beans.Facade;
 import beans.Personne;
 
@@ -24,7 +27,14 @@ public class App extends HttpServlet {
 	
 	@Override
 	public void init() {
-		f = new Facade() ;
+		Connection connection = null;
+		try {
+			connection = Connect.getConnection();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		f = new Facade(connection) ;
 	}
        
     /**
@@ -51,13 +61,13 @@ public class App extends HttpServlet {
 		String Associer = request.getParameter("Associer") ;
 		String personneId = request.getParameter("personneId") ;
 		String adresseId = request.getParameter("adresseId") ;
-		/*
+		
 		System.out.println(addP);
 		System.out.println(addA);
 		System.out.println(nom);
 		System.out.println(prenom);
 		System.out.println(ville);
-		System.out.println(rue);*/
+		System.out.println(rue);
 		System.out.println(op); 
 		System.out.println(Associer);
 		System.out.println(personneId);
@@ -66,7 +76,12 @@ public class App extends HttpServlet {
 
 		
 		if (addP!=null && nom!=null && prenom!=null && !nom.equals("") && !prenom.equals("") ) {
-			f.ajoutPersonne(nom, prenom) ;
+			try {
+				f.ajoutPersonne(nom, prenom) ;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			response.sendRedirect("index.html") ;
 		}
 		
@@ -104,10 +119,19 @@ public class App extends HttpServlet {
 			PrintWriter out = response.getWriter() ;
 			response.setContentType("text/html") ;
 			for(Personne p : f.listePersonnes()) {
-				out.println("<br>"+p.getNom()+" "+p.getPrenom()+" est dans:") ;
-				for(Adresse a : p.getListeAdresses()) {
-					out.println("**"+a.getRue()+" "+a.getVille()+",		") ;
+				if(p.getListeAdresses() != null) {
+					out.println("<br>"+p.getNom()+" "+p.getPrenom()+" est dans:") ;
+					for(Adresse a : p.getListeAdresses()) {
+						out.println(" **"+a.getRue()+" "+a.getVille()+",		") ;
+					}
 				}
+				else {
+					out.println("<br>"+p.getNom()+" "+p.getPrenom()+" n'est pas associé à une adresse") ;
+					
+				}
+					
+					
+				
 			}
 			
  		}

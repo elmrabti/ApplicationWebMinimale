@@ -5,13 +5,15 @@ import java.util.Collection;
 
 import org.apache.catalina.ha.backend.CollectedInfo;
 
+import util.Instance;
+
 public class Personne {
 	
 	private int id ;
 	private String nom ;
 	private String prenom ;
 	private Collection<Adresse> listeAdresses ;
-	private static int ctr = 0 ;
+	private static Instance instance = new Instance() ;
 	
 	
 	public int getId() {
@@ -33,7 +35,7 @@ public class Personne {
 	
 	public Personne(String nom, String prenom) {
 		super();
-		this.id = ctr++ ;
+		this.id = instance.getNext() ;
 		this.nom = nom ;
 		this.prenom = prenom ;
 	}

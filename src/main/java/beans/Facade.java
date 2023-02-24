@@ -1,24 +1,46 @@
 package beans;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import Dao.AdresseDAO;
+import Dao.IAdresseDAO;
+import Dao.IPersonneDAO;
+import Dao.PersonneDAO;
+
 public class Facade {
 	
-	Collection<Personne> per ;
-	Collection<Adresse> adr ;
+	private Collection<Personne> per ;
+	private Collection<Adresse> adr ;
+	private Connection connection;
+
+	
+    public Facade(Connection connection) {
+        this.connection = connection;
+		per = new ArrayList<Personne>() ;
+		adr = new ArrayList<Adresse>() ;
+    }
 	
 	public Facade() {
 		per = new ArrayList<Personne>() ;
 		adr = new ArrayList<Adresse>() ;
 	}
 	
-	public void ajoutPersonne(String nom, String prenom) {
+	public void ajoutPersonne(String nom, String prenom) throws SQLException {
 		per.add(new Personne(nom, prenom)) ;
+		IPersonneDAO personneDAO = new PersonneDAO(connection) ;
+		personneDAO.create(new Personne(nom, prenom));
+		
+	
 	}
 	
 	public void ajoutAdresse(String rue, String ville) {
 		adr.add(new Adresse(rue, ville)) ;
+		IAdresseDAO adresseDAO = new AdresseDAO(connection);
+		adresseDAO.create(new Adresse(rue, ville));
+		
 	}
 	
 	public Collection<Personne> listePersonnes(){

@@ -44,7 +44,16 @@ public class Facade {
 	}
 	
 	public Collection<Personne> listePersonnes(){
-		return per ;
+		//return per ;
+		IPersonneDAO personneDAO = new PersonneDAO(connection);
+		try {
+			return personneDAO.read() ;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null ;
+		}
+		
 	}
 	
 	public Collection<Adresse> listeAdresses(){

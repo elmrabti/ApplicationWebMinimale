@@ -7,7 +7,9 @@ import java.util.Collection;
 
 import Dao.AdresseDAO;
 import Dao.IAdresseDAO;
+import Dao.IPersonneAdresseDAO;
 import Dao.IPersonneDAO;
+import Dao.PersonneAdresseDAO;
 import Dao.PersonneDAO;
 
 public class Facade {
@@ -49,7 +51,6 @@ public class Facade {
 		try {
 			return personneDAO.read() ;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null ;
 		}
@@ -63,7 +64,6 @@ public class Facade {
 		try {
 			return adresseDAO.read();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
@@ -89,6 +89,14 @@ public class Facade {
 			//personne.setListeAdresses(liste);
 			System.out.println("Ici 0000");
 			personne.addAdresse(adresse);
+			IPersonneAdresseDAO personneAdresseDAO = new PersonneAdresseDAO(connection) ;
+			
+			try {
+				personneAdresseDAO.create(personne, adresse);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
 		}
 			
 		

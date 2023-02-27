@@ -15,6 +15,13 @@ public class Adresse {
 		this.rue = rue;
 		this.ville = ville;
 	}
+	
+	public Adresse(int id, int rue, String ville) {
+		super();
+		this.id = id;
+		this.rue = rue;
+		this.ville = ville;
+	}
 
 	
 	public int getId() {

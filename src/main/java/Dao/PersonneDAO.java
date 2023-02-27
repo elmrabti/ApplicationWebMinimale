@@ -30,13 +30,12 @@ public class PersonneDAO implements IPersonneDAO {
 	public void create(Personne p) throws SQLException {
 		// TODO Auto-generated method stub
 		
-		String insertQuery = "INSERT INTO personne (id, nom, prenom) VALUES (?, ?, ?)";
+		String insertQuery = "INSERT INTO personne (nom, prenom) VALUES (?, ?)";
         PreparedStatement preparedStatement = null;
         
 		preparedStatement = connection.prepareStatement(insertQuery);
-		preparedStatement.setInt(1, p.getId() );
-		preparedStatement.setString(2, p.getNom() );
-		preparedStatement.setString(3, p.getPrenom());
+		preparedStatement.setString(1, p.getNom() );
+		preparedStatement.setString(2, p.getPrenom());
 
 	    System.out.println(preparedStatement);
 		int i = preparedStatement.executeUpdate();
@@ -76,10 +75,11 @@ public class PersonneDAO implements IPersonneDAO {
 		String query ="SELECT * from personne;" ;
 		resultat = statement.executeQuery(query);
 		
-		if(resultat.next()) {
+		while(resultat.next()) {
+			int id = resultat.getInt("id");
 			String nom = resultat.getString("nom");
 			String prenom = resultat.getString("prenom") ;
-			personnes.add(new Personne(nom,prenom)) ;
+			personnes.add(new Personne(id,nom,prenom)) ;
 		}
 		
 		return personnes;

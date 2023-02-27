@@ -33,9 +33,15 @@ public class Personne {
 		this.listeAdresses = listeAdresses;
 	}
 	
+	public Personne(int id,String nom, String prenom) {
+		super();
+		this.id = id ;
+		this.nom = nom ;
+		this.prenom = prenom ;
+	}
+	
 	public Personne(String nom, String prenom) {
 		super();
-		this.id = instance.getNext() ;
 		this.nom = nom ;
 		this.prenom = prenom ;
 	}

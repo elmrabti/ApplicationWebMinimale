@@ -24,7 +24,7 @@ public class AdresseDAO implements IAdresseDAO {
 	public void create(Adresse a) {
 		// TODO Auto-generated method stub
 		
-		String insertQuery = "INSERT INTO adresse (id, rue, ville) VALUES (?, ?, ?)";
+		String insertQuery = "INSERT INTO adresse (rue, ville) VALUES (?, ?)";
         PreparedStatement preparedStatement = null;
 		try {
 			preparedStatement = connection.prepareStatement(insertQuery);
@@ -36,20 +36,14 @@ public class AdresseDAO implements IAdresseDAO {
 		// Inserer les parametres 
         
         try {
-			preparedStatement.setInt(1, a.getId() );
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        try {
-			preparedStatement.setInt(2, a.getRue() );
+			preparedStatement.setInt(1, a.getRue() );
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
         try {
-			preparedStatement.setString(3, a.getVille());
+			preparedStatement.setString(2, a.getVille());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -83,10 +77,11 @@ public class AdresseDAO implements IAdresseDAO {
 		String query ="SELECT * from adresse;" ;
 		resultat = statement.executeQuery(query);
 		
-		if(resultat.next()) {
+		while(resultat.next()) {
+			int id = resultat.getInt("id");
 			int rue = resultat.getInt("rue");
 			String ville = resultat.getString("ville") ;
-			adresses.add(new Adresse(rue,ville)) ;
+			adresses.add(new Adresse(id,rue,ville)) ;
 		}
 		return adresses;
 		

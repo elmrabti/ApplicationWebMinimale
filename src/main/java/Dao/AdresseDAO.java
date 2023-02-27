@@ -2,8 +2,13 @@ package Dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Collection;
 
+import beans.Adresse;
 import beans.Adresse;
 
 public class AdresseDAO implements IAdresseDAO {
@@ -37,7 +42,7 @@ public class AdresseDAO implements IAdresseDAO {
 			e.printStackTrace();
 		}
         try {
-			preparedStatement.setString(2, a.getRue() );
+			preparedStatement.setInt(2, a.getRue() );
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -67,7 +72,26 @@ public class AdresseDAO implements IAdresseDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	@Override
+	public Collection<Adresse> read() throws SQLException {
+		
+		Collection<Adresse> adresses = new ArrayList<>() ;
+		Statement statement = null ;
+		ResultSet resultat = null ;
+		statement = connection.createStatement();
+		String query ="SELECT * from adresse;" ;
+		resultat = statement.executeQuery(query);
+		
+		if(resultat.next()) {
+			int rue = resultat.getInt("rue");
+			String ville = resultat.getString("ville") ;
+			adresses.add(new Adresse(rue,ville)) ;
+		}
+		return adresses;
+		
+	}
+	
 	@Override
 	public void update(Adresse a) {
 		// TODO Auto-generated method stub
@@ -79,5 +103,7 @@ public class AdresseDAO implements IAdresseDAO {
 		// TODO Auto-generated method stub
 
 	}
+
+
 
 }

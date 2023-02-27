@@ -4,12 +4,12 @@ import util.Instance;
 
 public class Adresse {
 	
-	private String rue ;
+	private int rue ;
 	private String ville ;
 	private int id ;
 	private static Instance instance = new Instance() ;
 	
-	public Adresse(String rue, String ville) {
+	public Adresse(int rue, String ville) {
 		super();
 		this.id = instance.getNext();
 		this.rue = rue;
@@ -27,10 +27,10 @@ public class Adresse {
 	}
 
 
-	public String getRue() {
+	public int getRue() {
 		return rue;
 	}
-	public void setRue(String rue) {
+	public void setRue(int rue) {
 		this.rue = rue;
 	}
 	public String getVille() {

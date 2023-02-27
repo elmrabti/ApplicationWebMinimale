@@ -72,13 +72,14 @@ public class PersonneDAO implements IPersonneDAO {
 		Collection<Personne> personnes = new ArrayList<>() ;
 		Statement statement = null ;
 		ResultSet resultat = null ;
-		String query ="SELECT * from personne" ;
+		statement = connection.createStatement();
+		String query ="SELECT * from personne;" ;
 		resultat = statement.executeQuery(query);
 		
 		if(resultat.next()) {
 			String nom = resultat.getString("nom");
 			String prenom = resultat.getString("prenom") ;
-			personnes.add(new Personne("nom","prenom")) ;
+			personnes.add(new Personne(nom,prenom)) ;
 		}
 		
 		return personnes;

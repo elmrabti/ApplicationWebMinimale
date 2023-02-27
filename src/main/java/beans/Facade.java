@@ -36,7 +36,7 @@ public class Facade {
 	
 	}
 	
-	public void ajoutAdresse(String rue, String ville) {
+	public void ajoutAdresse(int rue, String ville) {
 		adr.add(new Adresse(rue, ville)) ;
 		IAdresseDAO adresseDAO = new AdresseDAO(connection);
 		adresseDAO.create(new Adresse(rue, ville));
@@ -44,7 +44,7 @@ public class Facade {
 	}
 	
 	public Collection<Personne> listePersonnes(){
-		//return per ;
+		//return per ;/*
 		IPersonneDAO personneDAO = new PersonneDAO(connection);
 		try {
 			return personneDAO.read() ;
@@ -53,11 +53,21 @@ public class Facade {
 			e.printStackTrace();
 			return null ;
 		}
+		//*/
 		
 	}
 	
 	public Collection<Adresse> listeAdresses(){
-		return adr ;
+ 		//return adr ;/*
+		IAdresseDAO adresseDAO = new AdresseDAO(connection) ;
+		try {
+			return adresseDAO.read();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		//*/
 	}
 	
 	public void associer(int personneId, int adresseId) {

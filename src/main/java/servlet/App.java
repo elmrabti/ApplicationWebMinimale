@@ -86,7 +86,7 @@ public class App extends HttpServlet {
 		}
 		
 		if (addA!=null && ville!=null && rue!=null && !ville.equals("") && !rue.equals("") ) {
-			f.ajoutAdresse(rue, ville) ;
+			f.ajoutAdresse(Integer.parseInt(rue), ville) ;
 			response.sendRedirect("index.html") ;
 		}
 		

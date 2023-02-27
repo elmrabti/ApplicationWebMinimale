@@ -74,10 +74,10 @@ public class Facade {
 		Personne personne = null ;
 		Adresse adresse = null ; 
 		
-		for(Personne p: per)
+		for(Personne p: this.listePersonnes() )
 			if(p.getId() == personneId)
 				personne = p ;
-		for(Adresse a: adr)
+		for(Adresse a: this.listeAdresses() )
 			if(a.getId() == adresseId)
 				adresse = a ;
 		System.out.println(personne);

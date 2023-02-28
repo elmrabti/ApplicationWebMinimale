@@ -112,6 +112,7 @@ public class App extends HttpServlet {
 		if (Associer!=null && personneId!=null && adresseId!=null) {
 			f.associer(Integer.parseInt(personneId), Integer.parseInt(adresseId) ) ;
 			response.sendRedirect("index.html") ;
+			
 		}
 		
 		

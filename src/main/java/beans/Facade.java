@@ -88,7 +88,7 @@ public class Facade {
 			//liste.add(adresse) ;
 			//personne.setListeAdresses(liste);
 			System.out.println("Ici 0000");
-			personne.addAdresse(adresse);
+			//personne.addAdresse(adresse);
 			IPersonneAdresseDAO personneAdresseDAO = new PersonneAdresseDAO(connection) ;
 			
 			try {

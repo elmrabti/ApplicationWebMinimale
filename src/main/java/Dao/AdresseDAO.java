@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import beans.Adresse;
+import beans.Personne;
 import beans.Adresse;
 
 public class AdresseDAO implements IAdresseDAO {
@@ -62,8 +63,20 @@ public class AdresseDAO implements IAdresseDAO {
 	}
 
 	@Override
-	public Adresse read(int id) {
-		// TODO Auto-generated method stub
+	public Adresse read(int id) throws SQLException {
+
+		Statement statement = null ;
+		ResultSet resultat = null ;
+		String select ="SELECT * from adresse where id= ?;" ;
+		PreparedStatement preparedStatement = connection.prepareStatement(select);
+		preparedStatement.setInt(1, id );
+		resultat = preparedStatement.executeQuery() ;
+		
+		if(resultat.next()) {
+			int rue = resultat.getInt("rue");
+			String ville = resultat.getString("ville") ;
+			return new Adresse(rue, ville);
+		}
 		return null;
 	}
 	

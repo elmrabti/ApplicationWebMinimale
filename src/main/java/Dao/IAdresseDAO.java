@@ -7,7 +7,7 @@ import beans.Adresse;
 
 public interface IAdresseDAO {
     public void create(Adresse a);
-    public Adresse read(int id);
+    public Adresse read(int id) throws SQLException;
     public Collection<Adresse> read() throws SQLException;
     public void update(Adresse a);
     public void delete(int id);

@@ -10,6 +10,7 @@ import java.util.Collection;
 
 import org.apache.catalina.ha.backend.CollectedInfo;
 
+import beans.Adresse;
 import beans.Personne;
 
 public class PersonneDAO implements IPersonneDAO {
@@ -79,7 +80,26 @@ public class PersonneDAO implements IPersonneDAO {
 			int id = resultat.getInt("id");
 			String nom = resultat.getString("nom");
 			String prenom = resultat.getString("prenom") ;
-			personnes.add(new Personne(id,nom,prenom)) ;
+			
+			Personne personne = new Personne(id,nom,prenom) ;
+
+			
+			String findAdresses = "SELECT id_adresse from adresse_personne where id_personne= ? ;";
+			PreparedStatement preparedStatement = connection.prepareStatement(findAdresses);
+			preparedStatement.setInt(1, id);
+			ResultSet result = preparedStatement.executeQuery() ;
+			
+			while(result.next()) {
+				IAdresseDAO adresseDAO = new AdresseDAO(connection) ;
+				Adresse a = adresseDAO.read(result.getInt("id_adresse") ) ;                       
+				personne.addAdresse(a);
+				
+			}
+			
+			personnes.add(personne) ;
+			
+			
+			
 		}
 		
 		return personnes;

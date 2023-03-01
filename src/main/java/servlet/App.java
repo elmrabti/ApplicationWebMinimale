@@ -27,6 +27,7 @@ public class App extends HttpServlet {
 	
 	@Override
 	public void init() {
+		/*
 		Connection connection = null;
 		try {
 			connection = Connect.getConnection();
@@ -34,7 +35,8 @@ public class App extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		f = new Facade(connection) ;
+		f = new Facade(connection) ;*/
+		f = new Facade() ;
 	}
        
     /**

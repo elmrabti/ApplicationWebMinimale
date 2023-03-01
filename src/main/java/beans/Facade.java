@@ -31,7 +31,7 @@ public class Facade {
 	public void ajoutPersonne(String nom, String prenom) throws SQLException {
 		per.add(new Personne(nom, prenom)) ;
 		IPersonneDAO personneDAO = new PersonneDAO(connection) ;
-		personneDAO.create(new Personne(nom, prenom));
+		//personneDAO.create(new Personne(nom, prenom));
 		
 	
 	}
@@ -39,7 +39,7 @@ public class Facade {
 	public void ajoutAdresse(String rue, String ville) {
 		adr.add(new Adresse(rue, ville)) ;
 		IAdresseDAO adresseDAO = new AdresseDAO(connection);
-		adresseDAO.create(new Adresse(rue, ville));
+		//adresseDAO.create(new Adresse(rue, ville));
 		
 	}
 	
@@ -65,11 +65,14 @@ public class Facade {
 		System.out.println(adresse);
 
 		if(personne!=null && adresse != null) {
-			//Collection<Adresse> liste = personne.getListeAdresses() ;
-			//liste.add(adresse) ;
-			//personne.setListeAdresses(liste);
+			Collection<Adresse> liste = personne.getListeAdresses() ;
+			if(liste == null) {
+				liste = new ArrayList<>();
+			}
+			liste.add(adresse) ;
+			personne.setListeAdresses(liste);
 			System.out.println("Ici 0000");
-			personne.addAdresse(adresse);
+			//personne.addAdresse(adresse);
 		}
 			
 		

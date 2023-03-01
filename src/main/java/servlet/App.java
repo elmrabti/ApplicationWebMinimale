@@ -30,6 +30,7 @@ public class App extends HttpServlet {
 		Connection connection = null;
 		try {
 			connection = Connect.getConnection();
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

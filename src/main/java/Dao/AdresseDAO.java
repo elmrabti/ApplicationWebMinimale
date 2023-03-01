@@ -67,7 +67,7 @@ public class AdresseDAO implements IAdresseDAO {
 
 		Statement statement = null ;
 		ResultSet resultat = null ;
-		String select ="SELECT * from adresse where id= ?;" ;
+		String select ="SELECT * from adresse where id= ?" ;
 		PreparedStatement preparedStatement = connection.prepareStatement(select);
 		preparedStatement.setInt(1, id );
 		resultat = preparedStatement.executeQuery() ;
@@ -87,7 +87,7 @@ public class AdresseDAO implements IAdresseDAO {
 		Statement statement = null ;
 		ResultSet resultat = null ;
 		statement = connection.createStatement();
-		String query ="SELECT * from adresse;" ;
+		String query ="SELECT * from adresse" ;
 		resultat = statement.executeQuery(query);
 		
 		while(resultat.next()) {

@@ -73,7 +73,7 @@ public class PersonneDAO implements IPersonneDAO {
 		Statement statement = null ;
 		ResultSet resultat = null ;
 		statement = connection.createStatement();
-		String query ="SELECT * from personne;" ;
+		String query ="SELECT * from personne" ;
 		resultat = statement.executeQuery(query);
 		
 		while(resultat.next()) {
@@ -84,7 +84,7 @@ public class PersonneDAO implements IPersonneDAO {
 			Personne personne = new Personne(id,nom,prenom) ;
 
 			
-			String findAdresses = "SELECT id_adresse from adresse_personne where id_personne= ? ;";
+			String findAdresses = "SELECT id_adresse from adresse_personne where id_personne= ? ";
 			PreparedStatement preparedStatement = connection.prepareStatement(findAdresses);
 			preparedStatement.setInt(1, id);
 			ResultSet result = preparedStatement.executeQuery() ;

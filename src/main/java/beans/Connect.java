@@ -33,8 +33,9 @@ public class Connect {
 		String server = p.getProperty("server") ;
 		String port = p.getProperty("port") ;
 		String db = p.getProperty("db") ;
+		String url = p.getProperty("url");
 		
-		String url = "jdbc:" + dbms + "://" + server + ":" + port + "/" + db ;
+		String url2 = "jdbc:" + dbms + "://" + server + ":" + port + "/" + db ;
 		String utilisateur = p.getProperty("user") ;
 		String motDePasse = p.getProperty("password") ;
 		System.out.println(url);
@@ -48,7 +49,7 @@ public class Connect {
 		}		
 		finally {
 			
-			System.out.println("connexion");
+			System.out.println("return connetion");
 			return connexion ;
 			
 			

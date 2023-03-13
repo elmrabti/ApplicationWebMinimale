@@ -33,13 +33,25 @@ public class CheckCookie extends HttpServlet {
     		response.setContentType("text/html");
     		PrintWriter out = response.getWriter();
     		Cookie[] cookies = request.getCookies();
+    		request.setAttribute("cookieFound", false);
     		if ( cookies != null ) {
 	    		for (int i = 0; i < cookies.length; i++) {
 	    			Cookie cookie = cookies[i];
 		    		if (cookie.getName().equals("username")) {
 			    		String userName = cookie.getValue();
+			    		System.out.println("CheckCookie Line 41");
+			    		System.out.println(userName);
+			    		System.out.println(request.getParameter("Nom"));
+			    		if(request.getParameter("Nom").equals(userName) ) {
 			    		out.println("Hello " + userName);
+			    		System.out.println("CheckCookie Line 46");
+			    		request.setAttribute("cookieFound", true);
 			    		break;
+			    		}
+			    		else {
+			    			System.out.println("CheckCookie line 47");
+			    		   	request.setAttribute("cookieFound", false);
+			    		}
 			    		}
 	    			}
     			}

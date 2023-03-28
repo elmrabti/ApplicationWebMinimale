@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -51,16 +52,28 @@ public class Profile extends HttpServlet {
 			
 			if (request.getAttribute("cookieFound").equals(false)) {
 				System.out.println("Profile line 53");
-				RequestDispatcher pass = request.getRequestDispatcher("password.html") ;
+				RequestDispatcher pass = request.getRequestDispatcher("Password") ;
 				System.out.println("Profile line 55");
-				pass.include(request, response) ;
-				System.out.println("Profile line 57");
-				System.out.println(request.getParameter("Password"));
-				if (request.getParameter("Password").equals("0000")) {
-				RequestDispatcher view2 = request.getRequestDispatcher("CookieTest");
-				System.out.println("Profile 61");
-				view2.include(request, response) ;
-				}
+				pass.forward(request, response) ;
+				
+				if(request.getParameter("Password")!= null ) {
+					System.out.println("Profile line 57");
+					System.out.println(request.getParameter("Nom"));	
+					String test = request.getParameter("test");
+					String password = request.getParameter("Password");
+					System.out.println("password value: " + password);
+					System.out.println("test value: " + test);
+					
+					
+					if (request.getParameter("Password").equals("0000")) {
+					RequestDispatcher view2 = request.getRequestDispatcher("CookieTest");
+					System.out.println("Profile 61");
+					view2.include(request, response) ;
+					
+					}
+					}
+				
+				
 			}
 				
 
